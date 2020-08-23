@@ -20,7 +20,7 @@ $ cp -rf .env.example .env
 
 Install dependencies 
 ```
-$ composer install  && npm instal --save
+$ composer install  && npm install --save
 ```
 Compile Assets
 ```
