@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Policies\Internal;
+namespace App\Policies\Modules;
 
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class InternalUserPolicy
+class EssentialPrinciple
 {
     use HandlesAuthorization;
 
@@ -14,11 +14,10 @@ class InternalUserPolicy
      *
      * @return void
      */
-    public function __construct()
-    {
+    public function __construct() {
         //
     }
-
+    
     /**
      * Description - Check if user can do action
      * @param \App\Models\User user
@@ -27,7 +26,7 @@ class InternalUserPolicy
     public function read(User $user): bool {
         if ($user->is_super_admin) {
             return true;
-        }else if ($user->tokenCan(['read-users-internal'])) {
+        }else if ($user->tokenCan(['read-essential-principles-dev', 'read-essential-principles-stage', 'read-essential-principles-prod'])) {
             return true;
         }else {
             return false;
@@ -42,7 +41,7 @@ class InternalUserPolicy
     public function add(User $user): bool {
         if ($user->is_super_admin) {
             return true;
-        }else if ($user->tokenCan(['add-users-internal'])) {
+        }else if ($user->tokenCan(['add-essential-principles-dev', 'add-essential-principles-stage', 'add-essential-principles-prod'])) {
             return true;
         }else {
             return false;
@@ -57,7 +56,7 @@ class InternalUserPolicy
     public function modify(User $user): bool {
         if ($user->is_super_admin) {
             return true;
-        }else if ($user->tokenCan(['modify-users-internal'])) {
+        }else if ($user->tokenCan(['modify-essential-principles-dev', 'modify-essential-principles-stage', 'modify-essential-principles-prod'])) {
             return true;
         }else {
             return false;

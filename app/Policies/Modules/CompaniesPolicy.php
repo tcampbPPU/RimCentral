@@ -5,7 +5,7 @@ namespace App\Policies\Modules;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class CompanyPolicy
+class CompaniesPolicy
 {
     use HandlesAuthorization;
 

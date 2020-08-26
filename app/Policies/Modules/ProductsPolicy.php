@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Policies\Internal;
+namespace App\Policies\Modules;
 
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class InternalUserPolicy
+class ProductsPolicy
 {
     use HandlesAuthorization;
 
@@ -14,11 +14,10 @@ class InternalUserPolicy
      *
      * @return void
      */
-    public function __construct()
-    {
+    public function __construct() {
         //
     }
-
+    
     /**
      * Description - Check if user can do action
      * @param \App\Models\User user
@@ -27,7 +26,7 @@ class InternalUserPolicy
     public function read(User $user): bool {
         if ($user->is_super_admin) {
             return true;
-        }else if ($user->tokenCan(['read-users-internal'])) {
+        }else if ($user->tokenCan(['read-products-dev', 'read-products-stage', 'read-products-prod'])) {
             return true;
         }else {
             return false;
@@ -42,7 +41,7 @@ class InternalUserPolicy
     public function add(User $user): bool {
         if ($user->is_super_admin) {
             return true;
-        }else if ($user->tokenCan(['add-users-internal'])) {
+        }else if ($user->tokenCan(['add-products-dev', 'add-products-stage', 'add-products-prod'])) {
             return true;
         }else {
             return false;
@@ -57,7 +56,7 @@ class InternalUserPolicy
     public function modify(User $user): bool {
         if ($user->is_super_admin) {
             return true;
-        }else if ($user->tokenCan(['modify-users-internal'])) {
+        }else if ($user->tokenCan(['modify-products-dev', 'modify-products-stage', 'modify-products-prod'])) {
             return true;
         }else {
             return false;
